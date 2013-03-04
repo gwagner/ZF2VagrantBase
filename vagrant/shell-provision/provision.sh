@@ -13,7 +13,7 @@
         echo ":logger: console" >> /etc/puppet/hiera.yaml
     fi
 
-# Install a puppet module for jenkins
+# Install a puppet module for iptables
 
     if [ ! -f /var/lib/install-puppet-module-firewall ]
     then
@@ -22,15 +22,6 @@
         puppet module install erwbgy/iptables
 
         touch /var/lib/install-puppet-module-firewall
-    fi
-
-    if [ ! -f /var/lib/install-puppet-module-rabbitmq ]
-    then
-        echo "Installing Puppet Module puppetlabs/rabbitmq"
-
-        puppet module install puppetlabs/rabbitmq
-
-        touch /var/lib/install-puppet-module-rabbitmq
     fi
 
 exit 0
