@@ -1,0 +1,16 @@
+#!/bin/sh
+
+rm <%= script_run_lock %>mongo-*
+
+cd /tmp/
+tar -xzvf mongo-php-driver-<%= scope.lookupvar "php::config::mongo_version" %>.tar.gz
+cd mongo-php-*
+phpize
+./configure
+make
+make install
+cd ..
+rm -rf mongo-php-*
+rm -rf mongo-php-driver-<%= scope.lookupvar "php::config::mongo_version" %>.tar.gz
+
+touch <%= script_run_lock %>mongo-<%= scope.lookupvar "php::config::mongo_version" %>

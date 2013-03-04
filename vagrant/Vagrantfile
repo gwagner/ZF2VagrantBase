@@ -1,0 +1,51 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+PLATFORM_IS_OSX  = (Object::RUBY_PLATFORM =~ /darwin/i) ? true : false
+
+Vagrant::Config.run do |config|
+
+    # Every Vagrant virtual environment requires a box to build off of.
+    config.vm.box = "CentOs63"
+
+    # The url from where the 'config.vm.box' box will be fetched if it
+    # doesn't already exist on the user's system.
+    config.vm.box_url = "http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.3-x86_64-v20130101.box"
+
+    config.vm.customize [
+        "modifyvm", :id,
+        "--memory", 2048,
+        "--cpus", PLATFORM_IS_OSX ? 2 : 1 ,
+        "--hwvirtex", PLATFORM_IS_OSX ? "on" : "off",
+        "--hwvirtexexcl", PLATFORM_IS_OSX ? "on" : "off",
+        "--vtxvpid", PLATFORM_IS_OSX ? "on" : "off",
+        "--ioapic", "on",
+        "--accelerate3d", "off",
+        "--natdnsproxy1", "off",
+        "--largepages", "on",
+    ]
+
+    # File sharing
+    config.vm.share_folder  "zf2", "/var/www/zf2", Dir.getwd + "/../", :extra => 'dmode=775,fmode=775', :create => true
+    config.vm.share_folder "PuppetModules", "/media/PuppetModules", "./modules", :create => true
+
+    # Machine Hostname
+    config.vm.host_name = "neufocus-development.dev"
+
+    # Machine IP address
+    config.vm.network :hostonly, "192.168.1.10"
+
+    # Boot with a GUI so you can see the screen. (Default is headless)
+    # config.vm.boot_mode = :gui
+
+    config.vm.provision :shell, :path => "shell-provision/provision.sh"
+
+    config.vm.provision :puppet do |puppet|
+            puppet.manifests_path = "manifests"
+            puppet.manifest_file  = "base.pp"
+            puppet.pp_path = "/tmp/vagrant-puppet"
+            puppet.options << "--pluginsync"
+            puppet.options << "--fileserverconfig=/vagrant/fileserver.conf"
+            puppet.options << "--modulepath=/etc/puppet/modules:/usr/share/puppet/modules:/media/PuppetModules"
+    end
+end
