@@ -35,6 +35,7 @@ These contributors are in no particular order
 |---------------|----------------|
 | [Zend](http://www.zend.com/en/)    |   [ZendFramekwork](https://github.com/zendframework/zf2) && [ZendSkeletonApplication](https://github.com/zendframework/ZendSkeletonApplication)   |
 | [Vagrant](http://www.vagrantup.com/)    |   [Vagrant](https://github.com/mitchellh/vagrant)   |
+| [VagrantBox](http://www.vagrantbox.es/) | [CentOS 6.3 i386 Minimal (VirtualBox Guest Additions 4.2.6, Chef 10.16.4, Puppet 3.0.2)](http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.3-i386-v20130101.box)
 | [Oracle](http://www.oracle.com/index.html) | [VirtualBox](https://www.virtualbox.org/) |
 | [Puppet Labs](https://puppetlabs.com/) | [Puppet](http://info.puppetlabs.com/download-pe.html) |
 | [PHP](http://php.net/) | [PHP](http://php.net/) |
