@@ -19,10 +19,14 @@ Installation
 
 > Please note, on your first `vagrant up` you will download a 400MB CentOS image.  This will take some time.  Every subsequent time you use this, if you keep the VM name the same, you will not need to re-download.
 
-But, I wana use this with my project :shit:?
+But, I wana use this with my project!!
 ------------
 
+:thumbsdown: :thumbsdown:
+
 You can take the [vagrant directory](https://github.com/gwagner/ZF2VagrantBase/tree/master/vagrant) right out of this project directly into your project and use it.  Once it is on your project (and you have installed VBox / Vagrant), navigate to your vagrant directory and run `vagrant up` from your terminal.  It is very VERY portable that way.  That will give you a VM running on YOUR existing project!
+
+:thumbsup: :thumbsup:
 
 > ***Note:*** You may need to disable the composer module from the [zf2 module](https://github.com/gwagner/ZF2VagrantBase/blob/master/vagrant/modules/zf2/manifests/init.pp) if you are not using composer in your project
 
