@@ -17,7 +17,7 @@ Installation
 1. Once the machine is up and running, navigate to http://192.168.1.10
 1. Proffit!!!
 
-> Please note, on your first `vagrant up` you will download a 400MB CentOS image.  This will take some time.  Every subsequent time you use this, if you keep the VM name the same, you will not need to re-download.
+> ***Note:*** On your first `vagrant up` you will download a 400MB CentOS image.  This will take some time.  Every subsequent time you use this, if you keep the VM name the same, you will not need to re-download.
 
 But, I wana use this with my project!!
 ------------
