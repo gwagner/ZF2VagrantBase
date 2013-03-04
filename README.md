@@ -24,14 +24,12 @@ Contributors
 ------------
 These contributors is in no particular order
 
-* [Zend](http://www.zend.com/en/) Provided [ZendFramekwork](https://github.com/zendframework/zf2) && [ZendSkeletonApplication](https://github.com/zendframework/ZendSkeletonApplication)
 
-* [Vagrant](http://www.vagrantup.com/) Provided [Vagrant](https://github.com/mitchellh/vagrant)
-
-* [Oracle](http://www.oracle.com/index.html) Provided [VirtualBox](https://www.virtualbox.org/)
-
-* [Puppet Labs](https://puppetlabs.com/) Provided [Puppet](http://info.puppetlabs.com/download-pe.html)
-
-* [PHP](http://php.net/) Provided [PHP](http://php.net/)
-
-* [Geoffrey Wagner](https://twitter.com/gwagner85) Provided [ZF2VagrantBase](https://github.com/gwagner/ZF2VagrantBase)
+| Contributor  | Provided  |
+|---------------|----------------|
+| [Zend](http://www.zend.com/en/)    |   [ZendFramekwork](https://github.com/zendframework/zf2) && [ZendSkeletonApplication](https://github.com/zendframework/ZendSkeletonApplication)   |
+| [Vagrant](http://www.vagrantup.com/)    |   [Vagrant](https://github.com/mitchellh/vagrant)   |
+| [Oracle](http://www.oracle.com/index.html) | [VirtualBox](https://www.virtualbox.org/) |
+| [Puppet Labs](https://puppetlabs.com/) | [Puppet](http://info.puppetlabs.com/download-pe.html) |
+| [PHP](http://php.net/) | [PHP](http://php.net/) |
+| [Geoffrey Wagner](https://twitter.com/gwagner85) | [ZF2VagrantBase](https://github.com/gwagner/ZF2VagrantBase) |
