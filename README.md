@@ -28,7 +28,7 @@ You can take the [vagrant directory](https://github.com/gwagner/ZF2VagrantBase/t
 
 Contributors
 ------------
-These contributors is in no particular order
+These contributors are in no particular order
 
 
 | Contributor  | Provided  |
