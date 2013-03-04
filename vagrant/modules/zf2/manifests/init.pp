@@ -2,7 +2,7 @@ class zf2
 {
     include fedora, firewall, git, memcached, mysqld, nano, php-httpd, php::config, php::bcmath-extension,
         php::gd-extension, php::intl-extension, php::ldap-extension, php::mcrypt-extension,
-        php::memcache-extension, php::mongo-extension, php::mysqlnd-extension, php::pear-extension,
+        php::memcached-extension, php::mongo-extension, php::mysqlnd-extension, php::pear-extension,
         php::snmp-extension, php::soap-extension, php::xml-extension
 
     # Create an zf2 vhost
@@ -57,7 +57,7 @@ class zf2
 
 
     # Make sure we trigger httpd for a restart when this extension is installed or changed
-    Package["${php::config::php_prefix}-pecl-memcache-${php::config::memcached_version}"] ~> Service['httpd']
+    Package["${php::config::php_prefix}-pecl-memcached-${php::config::memcached_version}"] ~> Service['httpd']
 
     # Make sure we trigger httpd for a restart when this extension is installed or changed
     Exec['/tmp/install-php-mongo.sh'] ~> Service['httpd']

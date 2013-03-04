@@ -22,6 +22,17 @@ class repo-ius
             require => [
                 Host['ius']
             ];
+
+        # Archive for older versions
+            "ius-development":
+                mirrorlist => 'http://dmirr.iuscommunity.org/mirrorlist/?repo=ius-el$releasever-dev&arch=$basearch',
+                descr => 'IUS Community Archive Packages for Enterprise Linux $releasever - $basearch',
+                failovermethod => 'priority',
+                enabled => 1,
+                gpgcheck => 0,
+                require => [
+                    Host['ius']
+                ];
     }
 
     host {

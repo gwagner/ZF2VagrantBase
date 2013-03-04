@@ -1,8 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-PLATFORM_IS_OSX  = (Object::RUBY_PLATFORM =~ /darwin/i) ? true : false
-
 Vagrant::Config.run do |config|
 
     # Every Vagrant virtual environment requires a box to build off of.
@@ -15,10 +13,10 @@ Vagrant::Config.run do |config|
     config.vm.customize [
         "modifyvm", :id,
         "--memory", 2048,
-        "--cpus", PLATFORM_IS_OSX ? 2 : 1 ,
-        "--hwvirtex", PLATFORM_IS_OSX ? "on" : "off",
-        "--hwvirtexexcl", PLATFORM_IS_OSX ? "on" : "off",
-        "--vtxvpid", PLATFORM_IS_OSX ? "on" : "off",
+        "--cpus", 2,
+        "--hwvirtex", "on",
+        "--hwvirtexexcl", "on",
+        "--vtxvpid", "on",
         "--ioapic", "on",
         "--accelerate3d", "off",
         "--natdnsproxy1", "off",
@@ -33,7 +31,7 @@ Vagrant::Config.run do |config|
     config.vm.host_name = "neufocus-development.dev"
 
     # Machine IP address
-    config.vm.network :hostonly, "192.168.1.10"
+    config.vm.network :hostonly, "192.168.1.12"
 
     # Boot with a GUI so you can see the screen. (Default is headless)
     # config.vm.boot_mode = :gui

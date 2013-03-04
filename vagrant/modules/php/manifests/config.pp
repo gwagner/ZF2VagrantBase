@@ -8,6 +8,7 @@ class php::config {
     $php_timezone = 'America/Chicago'
 
     # Extension Version Information
-    $memcached_version = '3.0.7-2.ius.el6'
+    $memcache_version = '3.0.7-2.ius.el6'
+    $memcached_version = '2.1.0-2.ius.el6'
     $mongo_version = '1.2.12'
 }

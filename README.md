@@ -14,7 +14,7 @@ Installation
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) `https://www.virtualbox.org/wiki/Downloads`
 1. Inside of your clone of [ZF2VagrantBase](https://github.com/gwagner/ZF2VagrantBase), navigate to the vagrant directory
 1. Type `vagrant up`
-1. Once the machine is up and running, navigate to http://192.168.1.10
+1. Once the machine is up and running, navigate to http://192.168.1.12
 1. Proffit!!!
 
 > ***Note:*** On your first `vagrant up` you will download a 400MB CentOS image.  This will take some time.  Every subsequent time you use this, if you keep the VM name the same, you will not need to re-download.
