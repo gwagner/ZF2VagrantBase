@@ -1,52 +1,37 @@
-ZendSkeletonApplication
+ZF2VagrantBase
 =======================
 
 Introduction
 ------------
-This is a simple, skeleton application using the ZF2 MVC layer and module
-systems. This application is meant to be used as a starting place for those
-looking to get their feet wet with ZF2.
 
+This is specifically designed to give you a fully working ZF2 Skeleton Application in a vagrant environment. I have gone through and painstakingly put together a setup that once cloned will require X steps to completely have a working LAMP stack in a virtual machine. If you are looking for a guide on how to work with [ZendFramekwork](https://github.com/zendframework/zf2), [VirtualBox](https://www.virtualbox.org/), or [Vagrant](http://downloads.vagrantup.com/) go to their website's and RTM.
 
 Installation
 ------------
 
-Using Composer (recommended)
-----------------------------
-The recommended way to get a working copy of this project is to clone the repository
-and use `composer` to install dependencies using the `create-project` command:
+1. Clone [ZF2VagrantBase](https://github.com/gwagner/ZF2VagrantBase) `https://github.com/gwagner/ZF2VagrantBase.git`
+1. Install [Vagrant](http://downloads.vagrantup.com/) `http://downloads.vagrantup.com/`
+1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) `https://www.virtualbox.org/wiki/Downloads`
+1. Inside of your clone of [ZF2VagrantBase](https://github.com/gwagner/ZF2VagrantBase), navigate to the vagrant directory
+1. Type `vagrant up`
+1. Once the machine is up and running, navigate to http://192.168.1.10
+1. Proffit!!!
 
-    curl -s https://getcomposer.org/installer | php --
-    php composer.phar create-project --repository-url="http://packages.zendframework.com" zendframework/skeleton-application path/to/install
+> Please note, on your first `vagrant up` you will download a 400MB CentOS image.  This will take some time.  Every subsequent time you use this, if you keep the VM name the same, you will not need to re-download.
 
-Alternately, clone the repository and manually invoke `composer` using the shipped
-`composer.phar`:
 
-    cd my/project/dir
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git
-    cd ZendSkeletonApplication
-    php composer.phar self-update
-    php composer.phar install
-
-(The `self-update` directive is to ensure you have an up-to-date `composer.phar`
-available.)
-
-Another alternative for downloading the project is to grab it via `curl`, and
-then pass it to `tar`:
-
-    cd my/project/dir
-    curl -#L https://github.com/zendframework/ZendSkeletonApplication/tarball/master | tar xz --strip-components=1
-
-You would then invoke `composer` to install dependencies per the previous
-example.
-
-Using Git submodules
---------------------
-Alternatively, you can install using native git submodules:
-
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git --recursive
-
-Virtual Host
+Contributors
 ------------
-Afterwards, set up a virtual host to point to the public/ directory of the
-project and you should be ready to go!
+These contributors is in no particular order
+
+* [Zend](http://www.zend.com/en/) Provided [ZendFramekwork](https://github.com/zendframework/zf2) && [ZendSkeletonApplication](https://github.com/zendframework/ZendSkeletonApplication)
+
+* [Vagrant](http://www.vagrantup.com/) Provided [Vagrant](https://github.com/mitchellh/vagrant)
+
+* [Oracle](http://www.oracle.com/index.html) Provided [VirtualBox](https://www.virtualbox.org/)
+
+* [Puppet Labs](https://puppetlabs.com/) Provided [Puppet](http://info.puppetlabs.com/download-pe.html)
+
+* [PHP](http://php.net/) Provided [PHP](http://php.net/)
+
+* [Geoffrey Wagner](https://twitter.com/gwagner85) Provided [ZF2VagrantBase](https://github.com/gwagner/ZF2VagrantBase)
