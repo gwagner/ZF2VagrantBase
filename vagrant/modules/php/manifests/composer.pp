@@ -10,7 +10,7 @@ class php::composer($path)
             creates => "${path}/composer.phar",
             require => [
                 Class['php', 'git']
-            ]
+            ];
 
         # Then do an init
         "php-composer-init":
@@ -19,7 +19,7 @@ class php::composer($path)
             creates => "${path}/composer.lock",
             require => [
                 Exec['php-composer-install']
-            ]
+            ];
 
         # Any other time the machine starts, do an update
         "php-composer-update":
@@ -28,7 +28,7 @@ class php::composer($path)
             require => [
                 Exec['php-composer-install'],
                 Exec['php-composer-init']
-            ]
+            ];
 
     }
 }

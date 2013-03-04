@@ -61,7 +61,7 @@ class fedora {
     }
 
     package {
-        ['ntp', 'gcc','java-1.7.0-openjdk']:
+        'gcc':
             ensure => 'installed',
             provider => 'yum';
     }
