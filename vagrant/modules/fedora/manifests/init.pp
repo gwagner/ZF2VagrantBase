@@ -26,14 +26,6 @@ class fedora {
             owner  => 'root',
             group  => 'root',
             source => "puppet:///modules/fedora/yum.conf";
-
-        '/etc/ntp.conf':
-            ensure => present,
-            mode   => 0644,
-            owner  => 'root',
-            group  => 'root',
-            source => "puppet:///modules/fedora/ntp.conf",
-            notify => Service['ntpd'];
     }
 
     # always test with noop first!
@@ -48,16 +40,6 @@ class fedora {
             enable => true,
             hasrestart => true,
             hasstatus => true;
-
-        # Machine stats that can be polled very easily
-        'ntpd':
-            ensure => true,
-            enable => true,
-            require => [
-                File['/etc/ntp.conf'],
-                Package['ntp']
-            ],
-            subscribe => File['/etc/ntp.conf'];
     }
 
     package {
