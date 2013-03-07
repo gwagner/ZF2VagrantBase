@@ -1,6 +1,6 @@
 class php
 {
-    require php::config, repo-epel, repo-ius
+    require php::config, repo_epel, repo_ius
 
     package
     {
@@ -35,11 +35,13 @@ class php
             provider => 'yum',
             require => [
                 Yumrepo['ius'],
+                Yumrepo['ius-development'],
                 Package['re2c'],
                 Package['gcc'],
                 Package["php-common"],
-                Package["php-cli"]
-            ];
+                Package["php-cli"],
+            ],
+            alias => 'php-devel';
     }
 
     file{
@@ -53,7 +55,7 @@ class php
                 Package["php-cli"]
             ];
         '/etc/php.d':
-            ensure => present,
+            ensure => 'directory',
             mode   => 0644,
             owner  => 'root',
             group  => 'root';

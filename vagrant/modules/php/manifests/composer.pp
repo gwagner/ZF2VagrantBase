@@ -1,6 +1,28 @@
 class php::composer($path)
 {
-    include php, git
+    include php, php::config, git
+
+    file
+    {
+        '/root/.composer':
+            ensure => 'directory',
+            mode   => 0644,
+            owner  => 'root',
+            group  => 'root',
+            require => [
+                Exec["php-composer-install"]
+            ];
+        '/root/.composer/config.json':
+            mode => 644,
+            owner => "root",
+            group => "root",
+            path => "/root/.composer/config.json",
+            source => "puppet:///modules/php/composer-config.json",
+            require => [
+                Exec["php-composer-install"],
+                File["/root/.composer"]
+            ];
+    }
 
     exec {
         # First make sure we have composer
@@ -9,7 +31,8 @@ class php::composer($path)
             cwd => $path,
             creates => "${path}/composer.phar",
             require => [
-                Class['php', 'git']
+                Package['git', "${php::config::php_prefix}-xml-${php::config::php_version}"],
+                $php::config::extension_dependencies
             ];
 
         # Then do an init
@@ -18,7 +41,9 @@ class php::composer($path)
             cwd => $path,
             creates => "${path}/composer.lock",
             require => [
-                Exec['php-composer-install']
+                Exec['php-composer-install'],
+                Package['git', "${php::config::php_prefix}-xml-${php::config::php_version}"],
+                $php::config::extension_dependencies
             ];
 
         # Any other time the machine starts, do an update
@@ -27,7 +52,9 @@ class php::composer($path)
             cwd => $path,
             require => [
                 Exec['php-composer-install'],
-                Exec['php-composer-init']
+                Exec['php-composer-init'],
+                Package['git', "${php::config::php_prefix}-xml-${php::config::php_version}"],
+                $php::config::extension_dependencies
             ];
 
     }

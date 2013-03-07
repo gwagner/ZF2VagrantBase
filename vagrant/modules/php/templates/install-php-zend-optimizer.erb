@@ -1,0 +1,17 @@
+#!/bin/sh
+
+cd /tmp/
+
+if [ ! -f zend-optimizer-package.tar.gz ]
+then
+    exit 1
+fi
+
+tar -xzvf zend-optimizer-package.tar.gz
+cd ZendOptimizerPlus-*
+phpize
+./configure --with-php-config=/usr/bin/php-config
+make
+make install
+cd ..
+rm -rf ZendOptimizerPlus-*

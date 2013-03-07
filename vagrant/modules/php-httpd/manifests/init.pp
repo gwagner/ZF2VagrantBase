@@ -20,4 +20,6 @@ class php-httpd
 
     # Make sure that any change to PHP common restarts Apache
     Package["${php::config::php_prefix}-common-${php::config::php_version}"] ~> Service['httpd']
+
+    File['php-ini'] ~> Service['httpd']
 }

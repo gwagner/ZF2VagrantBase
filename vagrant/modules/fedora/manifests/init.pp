@@ -1,5 +1,7 @@
 class fedora {
 
+    include repo_centos
+
     file {
 
         '/etc/fstab':
@@ -45,7 +47,8 @@ class fedora {
     package {
         'gcc':
             ensure => 'installed',
-            provider => 'yum';
+            provider => 'yum',
+            require => Yumrepo['centos-base', 'centos-updates', 'centos-extras'];
     }
 
     # host entry with multiple aliases

@@ -1,6 +1,6 @@
 class php::memcache-extension
 {
-    include php::config, repo-epel, repo-ius
+    include php::config, repo_epel, repo_ius
 
     package
     {
@@ -9,7 +9,8 @@ class php::memcache-extension
             provider => 'yum',
             require => [Yumrepo['epel']];
 
-        ["${php::config::php_prefix}-pecl-memcache-${php::config::memcache_version}"]:
+        'php-ext-memcache':
+            name => "${php::config::php_prefix}-pecl-memcache-${php::config::memcache_version}",
             ensure => installed,
             provider => 'yum',
             require => [
@@ -31,7 +32,8 @@ class php::memcache-extension
             content => template('php/memcache-extension-ini.erb'),
             require => [
                 Package["${php::config::php_prefix}-common-${php::config::php_version}"],
-                Package["${php::config::php_prefix}-devel-${php::config::php_version}"]
+                Package["${php::config::php_prefix}-devel-${php::config::php_version}"],
+                File['/etc/php.d']
             ];
     }
 }

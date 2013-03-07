@@ -11,14 +11,17 @@ class httpd
     package {
         ["httpd-tools-${httpd::config::httpd_version}", "httpd-devel-${httpd::config::httpd_version}"]:
             ensure => installed,
-            provider => 'yum';
-        ["httpd-${httpd::config::httpd_version}"]:
+            provider => 'yum',
+            require => Yumrepo['centos-base', 'centos-updates', 'centos-extras'];
+        'httpd':
+            name => "httpd-${httpd::config::httpd_version}",
             ensure => installed,
             provider => 'yum',
             alias => 'httpd',
             require => [
                 Package["httpd-tools-${httpd::config::httpd_version}"],
                 Package["httpd-devel-${httpd::config::httpd_version}"],
+                Yumrepo['centos-base', 'centos-updates', 'centos-extras']
             ];
     }
 
@@ -86,7 +89,7 @@ class httpd
             subscribe => [
                 Package["httpd-tools-${httpd::config::httpd_version}"],
                 Package["httpd-devel-${httpd::config::httpd_version}"],
-                Package["httpd-${httpd::config::httpd_version}"],
+                Package['httpd'],
                 File['httpd-readme'],
                 File['httpd-svn'],
                 File['httpd-welcome'],
@@ -110,7 +113,8 @@ define httpd::vhost (
             path => "/etc/httpd/virtual_hosts/${name}_vhost.conf",
             content => template("httpd/conf.d/vhost.erb"),
             notify => Service['httpd'],
-            ensure => $ensure;
+            ensure => $ensure,
+            require => Package['httpd'];
     }
 
     host {
@@ -118,6 +122,7 @@ define httpd::vhost (
             ip => '127.0.0.1',
             ensure => $ensure,
             host_aliases => $server_alias,
-            target => '/etc/hosts'
+            target => '/etc/hosts',
+            require => Package['httpd'];
     }
 }

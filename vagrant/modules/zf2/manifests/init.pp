@@ -1,20 +1,22 @@
 class zf2
 {
-    include fedora, firewall, git, memcached, mysqld, nano, php-httpd, php::config, php::bcmath-extension,
-        php::gd-extension, php::intl-extension, php::ldap-extension, php::mcrypt-extension,
-        php::memcached-extension, php::mongo-extension, php::mysqlnd-extension, php::pear-extension,
-        php::snmp-extension, php::soap-extension, php::xml-extension
+    include fedora, firewall, git, memcached, mysqld, nano, php-httpd, php::config,
+        php::bcmath-extension, php::gd-extension, php::intl-extension, php::mcrypt-extension,
+        php::memcached-extension, php::mongo-extension, php::mysqlnd-extension,
+        php::pear-extension, php::xml-extension, php::zend-optimizer-extension
 
     # Create an zf2 vhost
     httpd::vhost{
         'neufocus':
             directory => '/var/www/zf2/public',
-            server_alias => ["www.neufocus.dev"];
+            server_alias => ["www.neufocus.dev"],
+            compress_output => false;
     }
 
-    #Notify memcached to be restarted if a change is made to the vhost
+    # Notify memcached to be restarted if a change is made to the vhost
     File['neufocus_vhost'] ~> Service['memcached']
 
+    # Standard files used to run a PHP server
     file{
 
         'php-error-log':
@@ -42,6 +44,7 @@ class zf2
 
     }
 
+    # Clean out the tmp dir
     tidy {
         # Delete old tmp data that is more than 1 week old
         "/tmp/":
@@ -57,13 +60,21 @@ class zf2
 
 
     # Make sure we trigger httpd for a restart when this extension is installed or changed
-    Package["${php::config::php_prefix}-pecl-memcached-${php::config::memcached_version}"] ~> Service['httpd']
+    Package["php-ext-bcmath","php-ext-gd","php-ext-intl","php-ext-mcrypt",
+        "php-ext-memcached","php-ext-mysqlnd","php-ext-pear","php-ext-xml"] ~> Service['httpd']
 
-    # Make sure we trigger httpd for a restart when this extension is installed or changed
-    Exec['/tmp/install-php-mongo.sh'] ~> Service['httpd']
+    Exec["php-ext-mongo","php-ext-zend-optimizer"] ~> Service['httpd']
 
+    File['zend-optimizer-extension-ini', 'mongo-extension-ini'] ~> Service['httpd']
+
+    # Run composer to pull down ZF2 libraries
     class {
         'php::composer':
             path => '/var/www/zf2/'
+    }
+
+    # Make sure port 80 is open
+    iptables::allow {
+        'tcp/80': port => '80', protocol => 'tcp';
     }
 }

@@ -24,4 +24,17 @@
         touch /var/lib/install-puppet-module-firewall
     fi
 
+# Remove current CentOS Repo && Apply the new one
+
+    if [ -f /etc/yum.repos.d/CentOS-Base.repo ]
+    then
+        echo "Dropping old CentOS Repo"
+
+        rm /etc/yum.repos.d/CentOS-Base.repo
+
+        echo "Ensuring new CentOS repos are in place to install packages"
+
+        puppet apply --modulepath=/etc/puppet/modules:/usr/share/puppet/modules:/media/PuppetModules --verbose -e 'include repo_centos, repo_epel'
+    fi
+
 exit 0

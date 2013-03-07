@@ -1,9 +1,12 @@
 class mysqld
 {
+    require repo_centos
+
     package {
         ["mysql-server"]:
             ensure => installed,
-            provider => 'yum';
+            provider => 'yum',
+            require => Yumrepo['centos-base', 'centos-updates', 'centos-extras'];
     }
 
      service {

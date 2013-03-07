@@ -1,10 +1,12 @@
 class memcached
 {
+    require repo_centos, repo_epel
+
     package{
         ['memcached', 'memcached-devel']:
             ensure => installed,
             provider => 'yum',
-            require => Yumrepo['epel'];
+            require => Yumrepo['epel','centos-base', 'centos-updates', 'centos-extras'];
     }
 
     file{
