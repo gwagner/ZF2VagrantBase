@@ -1,5 +1,9 @@
 #!/bin/sh
 
+PUPPET_MODULE_PATH="/media/PuppetModules"
+
+DEVELOPMENT=false
+
 # Make sure heira.yaml is in the puppet dir
 
     if [ ! -f /etc/puppet/hiera.yaml ]
@@ -23,6 +27,55 @@
 
         touch /var/lib/install-puppet-module-firewall
     fi
+
+
+# Install git so we can get all the proper puppet modules from github
+
+    if [ ! -f /usr/bin/git ]
+    then
+        echo "Installing Git for Puppet Modules"
+
+        yum install -y -q git
+    fi
+
+# Finally checkout all of the modules we need to build the machine
+
+    # Declare an associative array in bash (Bash 4.0+)
+
+    declare -A modules
+
+    # Module Recepie for Puppet.  These are all needed modules to setup the VM
+
+    modules[fedora]="https://github.com/gwagner/puppet-fedora.git"
+    modules[firewall]="https://github.com/gwagner/puppet-firewall.git"
+    modules[git]="https://github.com/gwagner/puppet-git.git"
+    modules[httpd]="https://github.com/gwagner/puppet-httpd.git"
+    modules[memcached]="https://github.com/gwagner/puppet-memcached.git"
+    modules[mysqld]="https://github.com/gwagner/puppet-mysqld.git"
+    modules[nano]="https://github.com/gwagner/puppet-nano.git"
+    modules[php-httpd]="https://github.com/gwagner/puppet-php-httpd.git"
+    modules[php]="https://github.com/gwagner/puppet-php.git"
+    modules[repo_epel]="https://github.com/gwagner/puppet-repo-epel.git"
+    modules[repo_ius]="https://github.com/gwagner/puppet-repo-ius.git"
+    modules[repo_centos]="https://github.com/gwagner/puppet-repo-centos.git"
+
+    for mod in "${!modules[@]}"
+    do
+        echo "Checking for $mod"
+
+        if [ ! -d $PUPPET_MODULE_PATH/$mod ]
+        then
+            echo "Module $mod Not Found.  Cloning from Github ${modules[$mod]}"
+
+            git clone "${modules[$mod]}" $PUPPET_MODULE_PATH/$mod
+
+        # If we are not in development, make sure we pull down any changes from github for the freshest build
+        elseif [ ! DEVELOPMENT ]
+            echo "Module $mod Found.  Pulling from Github ${modules[$mod]}"
+
+            git pull origin master $PUPPET_MODULE_PATH/$mod
+        fi
+    done
 
 # Remove current CentOS Repo && Apply the new one
 

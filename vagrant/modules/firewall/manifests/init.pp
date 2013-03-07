@@ -1,4 +1,0 @@
-class firewall
-{
-    include iptables
-}
