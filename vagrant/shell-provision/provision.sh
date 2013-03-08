@@ -2,7 +2,7 @@
 
 PUPPET_MODULE_PATH="/media/PuppetModules"
 
-DEVELOPMENT=false
+KEEP_UPDATED=false
 
 # Make sure heira.yaml is in the puppet dir
 
@@ -70,7 +70,7 @@ DEVELOPMENT=false
             git clone "${modules[$mod]}" $PUPPET_MODULE_PATH/$mod
 
         # If we are not in development, make sure we pull down any changes from github for the freshest build
-        elif [ $DEVELOPMENT = false ]
+        elif [ $KEEP_UPDATED = true ]
         then
             echo "Module $mod Found.  Pulling from Github ${modules[$mod]}"
 
