@@ -70,10 +70,14 @@ DEVELOPMENT=false
             git clone "${modules[$mod]}" $PUPPET_MODULE_PATH/$mod
 
         # If we are not in development, make sure we pull down any changes from github for the freshest build
-        elseif [ ! DEVELOPMENT ]
+        elif [ $DEVELOPMENT = false ]
+        then
             echo "Module $mod Found.  Pulling from Github ${modules[$mod]}"
 
-            git pull origin master $PUPPET_MODULE_PATH/$mod
+            git --git-dir=$PUPPET_MODULE_PATH/$mod/.git pull origin master
+
+        else
+            echo "Taking no action on module $mod"
         fi
     done
 
