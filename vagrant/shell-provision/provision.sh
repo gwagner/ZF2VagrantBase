@@ -2,7 +2,7 @@
 
 PUPPET_MODULE_PATH="/media/PuppetModules"
 
-KEEP_UPDATED=false
+KEEP_UPDATED=true
 
 # Make sure heira.yaml is in the puppet dir
 
@@ -61,6 +61,8 @@ KEEP_UPDATED=false
 
     for mod in "${!modules[@]}"
     do
+        CURRENT_DIR=`pwd`
+
         echo "Checking for $mod"
 
         if [ ! -d $PUPPET_MODULE_PATH/$mod ]
@@ -74,7 +76,14 @@ KEEP_UPDATED=false
         then
             echo "Module $mod Found.  Pulling from Github ${modules[$mod]}"
 
-            git --git-dir=$PUPPET_MODULE_PATH/$mod/.git pull origin master
+            # Move to the proper dir
+            cd $PUPPET_MODULE_PATH/$mod/
+
+            # Do the git pull, we need to do it this way becaue of a git bug
+            git pull origin master
+
+            # Move back to the original dir
+            cd $CURRENT_DIR
 
         else
             echo "Taking no action on module $mod"

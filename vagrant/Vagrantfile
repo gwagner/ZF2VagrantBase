@@ -25,7 +25,7 @@ Vagrant::Config.run do |config|
 
     # File sharing
     config.vm.share_folder  "zf2", "/var/www/zf2", Dir.getwd + "/../", :extra => 'dmode=775,fmode=775', :create => true
-    config.vm.share_folder "PuppetModules", "/media/PuppetModules", "./modules", :create => true
+    config.vm.share_folder "PuppetModules", "/media/PuppetModules", "./modules", :extra => 'dmode=775,fmode=775',  :create => true
 
     # Machine Hostname
     config.vm.host_name = "neufocus-development.dev"
