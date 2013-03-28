@@ -6,9 +6,6 @@
 # Use this file with vagrant 1.0+
 # This file reflects the changes to the system through the new providers
 #
-#
-# The contents of this file are copied from Vagrant_2
-#
 ######################################
 
 require 'pathname'

@@ -5,6 +5,12 @@ class zf2
         php::memcached-extension, php::mongo-extension, php::mysqlnd-extension,
         php::pear-extension, php::xml-extension, php::zend-optimizer-extension
 
+    user {
+        'vagrant':
+            membership => 'minimum',
+            groups => ['apache','wheel'];
+    }
+
     # Create an zf2 vhost
     httpd::vhost{
         'neufocus':
