@@ -5,4 +5,4 @@ then
     mkdir -p /var/www/zf2
 fi
 
-mount -t vboxsf ZendFramework2Project /var/www/zf2 -o dmode=775,fmode=775
+mountpoint -q /var/www/zf2 || mount -t vboxsf ZendFramework2Project /var/www/zf2 -o dmode=775,fmode=775

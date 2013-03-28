@@ -5,4 +5,4 @@ then
     mkdir -p /media/PuppetModules
 fi
 
-mount -t vboxsf PuppetModules /media/PuppetModules -o dmode=775,fmode=775
+mountpoint -q /media/PuppetModules || mount -t vboxsf PuppetModules /media/PuppetModules -o dmode=775,fmode=775

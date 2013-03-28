@@ -9,6 +9,7 @@
     "homepage": "http://github.com/gwagner/ ZF2VagrantBase/",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "2.*"
+        "zendframework/zendframework": "2.*",
+        "phpunit/phpunit": "3.7.18"
     }
 }

@@ -3,11 +3,15 @@
 
 ######################################
 #
-# Use this file with vagrant < 1.0
+# Use this file with vagrant < 1.1
 # This file has no knowledge of providers and works only with virtualbox
 #
 ######################################
 
+# Use this line if your on a version of vagrant < 1.1
+# Vagrant::Config.run do |config|
+
+# Use this line if your on a version of vagrant 1.1+
 Vagrant.configure("1") do |config|
 
     # Every Vagrant virtual environment requires a box to build off of.
