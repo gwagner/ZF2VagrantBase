@@ -22,7 +22,7 @@ Installation
 Configuration Files
 ------------
 
-Since the version bump to 1.1+ for Vagrant, there is a divergence from previous configuration files to the new configuration files.  I have supplied a Vagrantfile\_1 and a Vagrantfile\_2 for use with this project.  By default the contents of Vagrantfile are a direct copy of the contents from Vagrantfile\_2.  I have commented the proper configuration changes that need to be made in the Vagrantfile\_1 if you are using vagrant < 1.1.
+Since the version bump to 1.1+ for Vagrant, there is a divergence from previous configuration files to the new configuration files.  I have supplied a Vagrantfile\_1 and a Vagrantfile\_2 for use with this project.  By default the contents of Vagrantfile are a direct copy of the contents from Vagrantfile\_2.  I have commented the proper configuration changes that need to be made in the Vagrantfile\_1 if you are using Vagrant < 1.1.
 
 > ***Note:*** The version change has made things a little confusing.  Try and default to using the default setup with Vagrant 1.1+  If that is not an option and you can not get things working on your computer, feel free to contact [@gwagner85](https://twitter.com/gwagner85) on twitter.
 

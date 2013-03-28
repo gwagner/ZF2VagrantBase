@@ -8,11 +8,7 @@
 #
 ######################################
 
-# Use this line if your on a version of vagrant < 1.1
-# Vagrant::Config.run do |config|
-
-# Use this line if your on a version of vagrant 1.1+
-Vagrant.configure("1") do |config|
+Vagrant::Config.run do |config|
 
     # Every Vagrant virtual environment requires a box to build off of.
     config.vm.box = "CentOs63"
