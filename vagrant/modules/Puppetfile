@@ -1,0 +1,39 @@
+forge "http://forge.puppetlabs.com"
+
+mod "erwbgy/iptables"
+
+mod "fedora",
+    :git => "https://github.com/gwagner/puppet-fedora.git"
+
+mod "firewall",
+    :git => "https://github.com/gwagner/puppet-firewall.git"
+
+mod "git",
+    :git => "https://github.com/gwagner/puppet-git.git"
+
+mod "httpd",
+    :git => "https://github.com/gwagner/puppet-httpd.git"
+
+mod "memcached",
+    :git => "https://github.com/gwagner/puppet-memcached.git"
+
+mod "mysqld",
+    :git => "https://github.com/gwagner/puppet-mysqld.git"
+
+mod "nano",
+    :git => "https://github.com/gwagner/puppet-nano.git"
+
+mod "php-httpd",
+    :git => "https://github.com/gwagner/puppet-php-httpd.git"
+
+mod "php",
+    :git => "https://github.com/gwagner/puppet-php.git"
+
+mod "repo_epel",
+    :git => "https://github.com/gwagner/puppet-repo-epel.git"
+
+mod "repo_ius",
+    :git => "https://github.com/gwagner/puppet-repo-ius.git"
+
+mod "repo_centos",
+    :git => "https://github.com/gwagner/puppet-repo-centos.git"

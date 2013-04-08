@@ -45,7 +45,7 @@ But, I wana use this with my project!!
 
 You can take the [vagrant directory](https://github.com/gwagner/ZF2VagrantBase/tree/master/vagrant) right out of this project directly into your project and use it.  Once it is on your project (and you have installed VirtualBox / Vagrant), navigate to your vagrant directory and run `vagrant up` from your terminal.  It is very VERY portable that way.  That will give you a VM running on YOUR existing project :thumbsup:
 
-> ***Note:*** You may need to disable the composer module from the [zf2 module](https://github.com/gwagner/ZF2VagrantBase/blob/master/vagrant/modules/zf2/manifests/init.pp) if you are not using composer in your project
+> ***Note:*** You may need to disable the composer module from the [zf2 module](https://github.com/gwagner/ZF2VagrantBase/blob/master/vagrant/modules/zf2/manifests/init.pp#L76-L80) if you are not using composer in your project
 
 Contributors
 ------------
@@ -56,7 +56,7 @@ These contributors are in no particular order
 |---------------|----------------|
 | [Zend](http://www.zend.com/en/)    |   [ZendFramekwork](https://github.com/zendframework/zf2) && [ZendSkeletonApplication](https://github.com/zendframework/ZendSkeletonApplication)   |
 | [HashiCorp](http://www.hashicorp.com/)    |   [Vagrant GitHub](https://github.com/mitchellh/vagrant) / [Vagrant Website](http://www.vagrantup.com/) |
-| [VagrantBox](http://www.vagrantbox.es/) | [CentOS 6.3 i386 Minimal (VirtualBox Guest Additions 4.2.6, Chef 10.16.4, Puppet 3.0.2)](http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.3-i386-v20130101.box)
+| [VagrantBox](http://www.vagrantbox.es/) | [CentOS 6.4 x86_64 Minimal (VirtualBox Guest Additions 4.2.8, Chef 11.4.0, Puppet 3.1.0)](http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130309.box)
 | [Oracle](http://www.oracle.com/index.html) | [VirtualBox](https://www.virtualbox.org/) |
 | [Puppet Labs](https://puppetlabs.com/) | [Puppet](http://info.puppetlabs.com/download-pe.html) |
 | [PHP](http://php.net/) | [PHP](http://php.net/) |

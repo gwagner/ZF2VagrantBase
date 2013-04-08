@@ -2,8 +2,6 @@
 
 PUPPET_MODULE_PATH="/media/PuppetModules"
 
-KEEP_UPDATED=true
-
 # Make sure heira.yaml is in the puppet dir
 
     if [ ! -f /etc/puppet/hiera.yaml ]
@@ -17,18 +15,6 @@ KEEP_UPDATED=true
         echo ":logger: console" >> /etc/puppet/hiera.yaml
     fi
 
-# Install a puppet module for iptables
-
-    if [ ! -f /var/lib/install-puppet-module-firewall ]
-    then
-        echo "Installing Puppet Module erwbgy/iptables"
-
-        puppet module install erwbgy/iptables
-
-        touch /var/lib/install-puppet-module-firewall
-    fi
-
-
 # Install git so we can get all the proper puppet modules from github
 
     if [ ! -f /usr/bin/git ]
@@ -38,57 +24,19 @@ KEEP_UPDATED=true
         yum install -y -q git
     fi
 
-# Finally checkout all of the modules we need to build the machine
+# Install the librarian itself
 
-    # Declare an associative array in bash (Bash 4.0+)
+    if ! gem spec librarian-puppet > /dev/null 2>&1; then
+        gem install librarian-puppet
+    fi
 
-    declare -A modules
+# Run the puppet librarian
 
-    # Module Recepie for Puppet.  These are all needed modules to setup the VM
+    # Get the current working dir
+    CWD=`pwd`
 
-    modules[fedora]="https://github.com/gwagner/puppet-fedora.git"
-    modules[firewall]="https://github.com/gwagner/puppet-firewall.git"
-    modules[git]="https://github.com/gwagner/puppet-git.git"
-    modules[httpd]="https://github.com/gwagner/puppet-httpd.git"
-    modules[memcached]="https://github.com/gwagner/puppet-memcached.git"
-    modules[mysqld]="https://github.com/gwagner/puppet-mysqld.git"
-    modules[nano]="https://github.com/gwagner/puppet-nano.git"
-    modules[php-httpd]="https://github.com/gwagner/puppet-php-httpd.git"
-    modules[php]="https://github.com/gwagner/puppet-php.git"
-    modules[repo_epel]="https://github.com/gwagner/puppet-repo-epel.git"
-    modules[repo_ius]="https://github.com/gwagner/puppet-repo-ius.git"
-    modules[repo_centos]="https://github.com/gwagner/puppet-repo-centos.git"
-
-    for mod in "${!modules[@]}"
-    do
-        CURRENT_DIR=`pwd`
-
-        echo "Checking for $mod"
-
-        if [ ! -d $PUPPET_MODULE_PATH/$mod ]
-        then
-            echo "Module $mod Not Found.  Cloning from Github ${modules[$mod]}"
-
-            git clone "${modules[$mod]}" $PUPPET_MODULE_PATH/$mod
-
-        # If we are not in development, make sure we pull down any changes from github for the freshest build
-        elif [ $KEEP_UPDATED = true ]
-        then
-            echo "Module $mod Found.  Pulling from Github ${modules[$mod]}"
-
-            # Move to the proper dir
-            cd $PUPPET_MODULE_PATH/$mod/
-
-            # Do the git pull, we need to do it this way becaue of a git bug
-            git pull origin master
-
-            # Move back to the original dir
-            cd $CURRENT_DIR
-
-        else
-            echo "Taking no action on module $mod"
-        fi
-    done
+    # CD to the puppet dir && Install all the puppet modules && Move back to the CWD
+    cd $PUPPET_MODULE_PATH && librarian-puppet install --path=$PUPPET_MODULE_PATH && cd $CWD
 
 # Remove current CentOS Repo && Apply the new one
 
@@ -103,4 +51,6 @@ KEEP_UPDATED=true
         puppet apply --modulepath=/etc/puppet/modules:/usr/share/puppet/modules:/media/PuppetModules --verbose -e 'include repo_centos, repo_epel'
     fi
 
-exit 0
+# Send back a clean exit code so vagrant doesn't get angry
+
+    exit 0

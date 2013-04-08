@@ -19,6 +19,7 @@ Vagrant::Config.run do |config|
 
     config.vm.customize [
         "modifyvm", :id,
+        "--name", "ZF2VagrantBase",
         "--memory", 2048,
         "--cpus", 2,
         "--hwvirtex", "on",

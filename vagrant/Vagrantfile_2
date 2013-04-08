@@ -10,6 +10,12 @@
 
 require 'pathname'
 
+HOST_ZF2_FOLDER     = (Pathname.new Dir.getwd + "/../").realpath.to_s
+GUEST_ZF2_FOLDER    = "/var/www/zf2"
+
+HOST_PUPPET_FOLDER  = (Pathname.new Dir.getwd + "/modules/").realpath.to_s
+GUEST_PUPPET_FOLDER = "/media/PuppetModules"
+
 Vagrant.configure("2") do |config|
 
     # Every Vagrant virtual environment requires a box to build off of.
@@ -21,25 +27,13 @@ Vagrant.configure("2") do |config|
 
     config.vm.provider :virtualbox do |v|
 
-        # Shared Folders, Use some Pathname.realpath magic because VBox cant understand relative paths
-        v.customize [
-            "sharedfolder", "add", :id,
-            "--name", "ZendFramework2Project",
-            "--hostpath", (Pathname.new Dir.getwd + "/../").realpath.to_s
-        ]
-
-        v.customize [
-            "sharedfolder", "add", :id,
-            "--name", "PuppetModules",
-            "--hostpath", (Pathname.new Dir.getwd + "/modules/").realpath.to_s
-        ]
-
         # Boot with a GUI so you can see the screen. (Default is headless)
         v.gui = false
 
         # Global machine specific settings
         v.customize [
             "modifyvm", :id,
+            "--name", "ZF2VagrantBase",
             "--memory", 2048,
             "--cpus", 2,
             "--hwvirtex", "on",
@@ -60,12 +54,13 @@ Vagrant.configure("2") do |config|
     config.vm.network :private_network, ip: "192.168.1.12"
 
     # File sharing Mounting
-    config.vm.provision :shell, :path => "shell-provision/mount-ZendFramework2Project.sh"
-    config.vm.provision :shell, :path => "shell-provision/mount-PuppetModules.sh"
+    config.vm.synced_folder HOST_ZF2_FOLDER, GUEST_ZF2_FOLDER, :create => true, :extra => 'dmode=777,fmode=777'
+    config.vm.synced_folder HOST_PUPPET_FOLDER, GUEST_PUPPET_FOLDER, :create => true, :extra => 'dmode=777,fmode=777'
 
     # Get the puppet provisioning setup properly
     config.vm.provision :shell, :path => "shell-provision/provision.sh"
 
+    # Finally run puppet to provision the machine
     config.vm.provision :puppet do |puppet|
         puppet.manifests_path = "manifests"
         puppet.manifest_file  = "base.pp"
