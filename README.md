@@ -12,7 +12,7 @@ Installation
 1. Clone [ZF2VagrantBase](https://github.com/gwagner/ZF2VagrantBase) `https://github.com/gwagner/ZF2VagrantBase.git`
 1. Install [Vagrant](http://downloads.vagrantup.com/) `http://downloads.vagrantup.com/`
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) `https://www.virtualbox.org/wiki/Downloads`
-1. Inside of your clone of [ZF2VagrantBase](https://github.com/gwagner/ZF2VagrantBase), navigate to the vagrant directory
+1. Inside of your clone of [ZF2VagrantBase](https://github.com/gwagner/ZF2VagrantBase), navigate to the [vagrant directory](https://github.com/gwagner/ZF2VagrantBase/tree/master/vagrant)
 1. Type `vagrant up`
 1. Once the machine is up and running, navigate to http://192.168.1.12
 1. Profit!!!
@@ -26,16 +26,18 @@ Since the version bump to 1.1+ for Vagrant, there is a divergence from previous 
 
 > ***Note:*** The version change has made things a little confusing.  Try and default to using the default setup with Vagrant 1.1+  If that is not an option and you can not get things working on your computer, feel free to contact [@gwagner85](https://twitter.com/gwagner85) on twitter.
 
+There is also a configuration file located in the [/vagrant/modules](https://github.com/gwagner/ZF2VagrantBase/tree/master/vagrant/modules) folder named [Puppetfile](https://github.com/gwagner/ZF2VagrantBase/tree/master/vagrant/modules/Puppetfile).  This file holds the configuration file to determine what puppet modules need to be downloaded to install your fully working LAMP stack with ZF2.
+
 Unit Testing
 ------------
 
 Testing is pretty simple.  Follow these steps if you plan on developing in the application module.  If you are going creating your own module from scratch, use the application module as a template.
 
 * Run tests without code coverage
-    1. In your terminal, navigate to your vagrant directory
+    1. In your terminal, navigate to your [vagrant directory](https://github.com/gwagner/ZF2VagrantBase/tree/master/vagrant)
     1. Run the following command `vagrant ssh -c "sudo php /var/www/zf2/vendor/phpunit/phpunit/phpunit.php -c /var/www/zf2/test/phpunit-fast.xml"`
 * Run tests with code coverage
-    1. In your terminal, navigate to your vagrant directory
+    1. In your terminal, navigate to your [vagrant directory](https://github.com/gwagner/ZF2VagrantBase/tree/master/vagrant)
     1. Run the following command `vagrant ssh -c "sudo php /var/www/zf2/vendor/phpunit/phpunit/phpunit.php -c /var/www/zf2/test/phpunit.xml"`
 
 Your testing log files will end up in PROJECT_ROOT/data/log
@@ -57,6 +59,8 @@ These contributors are in no particular order
 | [Zend](http://www.zend.com/en/)    |   [ZendFramekwork](https://github.com/zendframework/zf2) && [ZendSkeletonApplication](https://github.com/zendframework/ZendSkeletonApplication)   |
 | [HashiCorp](http://www.hashicorp.com/)    |   [Vagrant GitHub](https://github.com/mitchellh/vagrant) / [Vagrant Website](http://www.vagrantup.com/) |
 | [VagrantBox](http://www.vagrantbox.es/) | [CentOS 6.4 x86_64 Minimal (VirtualBox Guest Additions 4.2.8, Chef 11.4.0, Puppet 3.1.0)](http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130309.box)
+| [Rodjek (Tim Sharpe)](https://github.com/rodjek) | [librarian-puppet](https://github.com/rodjek/librarian-puppet) |
+| [Jmather (Jacob Mather)](https://github.com/jmather) | Pointed me to librarian-puppet |
 | [Oracle](http://www.oracle.com/index.html) | [VirtualBox](https://www.virtualbox.org/) |
 | [Puppet Labs](https://puppetlabs.com/) | [Puppet](http://info.puppetlabs.com/download-pe.html) |
 | [PHP](http://php.net/) | [PHP](http://php.net/) |
