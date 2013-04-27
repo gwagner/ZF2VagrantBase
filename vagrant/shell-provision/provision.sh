@@ -2,6 +2,8 @@
 
 PUPPET_MODULE_PATH="/media/PuppetModules"
 
+KEEP_UPDATED=false
+
 # Make sure heira.yaml is in the puppet dir
 
     if [ ! -f /etc/puppet/hiera.yaml ]
@@ -31,12 +33,23 @@ PUPPET_MODULE_PATH="/media/PuppetModules"
     fi
 
 # Run the puppet librarian
+    if [ $KEEP_UPDATED = true ] || [ ! -f $PUPPET_MODULE_PATH/Puppetfile.lock ]
+    then
+        # Get the current working dir
+        CWD=`pwd`
 
-    # Get the current working dir
-    CWD=`pwd`
+        # CD to the puppet dir
+        cd $PUPPET_MODULE_PATH
 
-    # CD to the puppet dir && Install all the puppet modules && Move back to the CWD
-    cd $PUPPET_MODULE_PATH && librarian-puppet install --path=$PUPPET_MODULE_PATH && cd $CWD
+        # Run the update to get the newest version from the repo
+        if [ $KEEP_UPDATED = true ]
+        then
+            librarian-puppet update
+        fi
+
+        #Install all the puppet modules && Move back to the CWD
+        librarian-puppet install --path=$PUPPET_MODULE_PATH && cd $CWD
+    fi
 
 # Remove current CentOS Repo && Apply the new one
 
